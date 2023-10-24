@@ -1,0 +1,4 @@
+rootProject.name = 'select-project-clould-parent'
+include 'user'
+include 'order'
+
