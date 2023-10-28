@@ -11,4 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 public interface UserService extends IService<User> {
     User findUserByUserId(Long userId);
+
+    void queryUsers();
 }

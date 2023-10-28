@@ -9,10 +9,19 @@ spring:
     url: jdbc:mysql://192.168.76.100:3306/spzx-cloud-order?characterEncoding=UTF8
     username: root
     password: 123456
-
-# 配置mybatis的相关信息
-mybatis:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.76.100:8848
+        cluster-name: SH
+        namespace: 4a88035e-acf3-45a9-924f-2421acbff67a  # 配置服务实例所属名称空间
+    loadbalancer:
+      nacos: # 集成nacos的负载均衡算法,默认：随机
+        enabled: true
+    compatibility-verifier:
+      enabled: false
+  application:
+    name: spzx-cloud-order   # 每一个服务注册到nacos注册中心都需要提供一个服务名称,order微服务注册的时候需要更改微服务名称
+mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  type-aliases-package: com.atguigu.spzx.cloud.order.entity
-  mapper-locations: classpath:/mapper/*.xml
+    map-underscore-to-camel-case: false

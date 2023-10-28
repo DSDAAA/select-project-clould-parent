@@ -1,6 +1,6 @@
 # 配置服务端口号
 server:
-  port: 10100
+  port: 10101
 
 # 配置数据库的连接信息
 spring:
@@ -9,10 +9,17 @@ spring:
     url: jdbc:mysql://192.168.76.100:3306/spzx-cloud-user?characterEncoding=UTF8
     username: root
     password: 123456
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.76.100:8848
+        cluster-name: SH
+    compatibility-verifier:
+      enabled: false
+    sentinel:
+      transport:
+        dashboard: localhost:8080  # 配置sentinel控制台地址
+      web-context-unify: false
+  application:
+    name: spzx-cloud-user   # 每一个服务注册到nacos注册中心都需要提供一个服务名称,order微服务注册的时候需要更改微服务名称
 
-# 配置mybatis的相关信息
-mybatis:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  type-aliases-package: com.atguigu.spzx.cloud.user.entity
-  mapper-locations: classpath:/mapper/*.xml

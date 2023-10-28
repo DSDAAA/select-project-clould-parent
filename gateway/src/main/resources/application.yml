@@ -1,0 +1,24 @@
+server:
+  port: 8222
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #设置为true表示启用服务注册和发现功能
+      routes:
+        - id: spzx-cloud-user  # 路由id，可以自定义，只要唯一即可
+          uri: lb://spzx-cloud-user  # 路由的目标地址 lb就是负载均衡，后面跟服务名称
+          predicates:
+            - Path=/*/user/** # 路径匹配
+          filters:
+            - AddRequestHeader=Truth, dsdaaa       # 配置路由基本的过滤器，给访问user微服务的所有接口添加Truth请求头
+        - id: spzx-cloud-order
+          uri: lb://spzx-cloud-order
+          predicates:
+            - Path=/*/order/** # 路径匹配
+    nacos:
+      discovery:
+        server-addr: 192.168.76.100:8848

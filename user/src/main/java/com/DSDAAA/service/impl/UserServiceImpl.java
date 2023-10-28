@@ -3,6 +3,7 @@ package com.DSDAAA.service.impl;
 import com.DSDAAA.domain.User;
 import com.DSDAAA.mapper.UserMapper;
 import com.DSDAAA.service.UserService;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Override
     public User findUserByUserId(Long userId) {
         return userMapper.selectById(userId);
+    }
+
+    @Override
+    @SentinelResource("users")
+    public void queryUsers() {
+        System.err.println("查询用户");
     }
 }
 

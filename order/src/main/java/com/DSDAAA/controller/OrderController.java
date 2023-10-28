@@ -1,6 +1,7 @@
 package com.DSDAAA.controller;
 
 import com.DSDAAA.domain.Order;
+import com.DSDAAA.domain.vo.OrderUserVO;
 import com.DSDAAA.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping(value = "/findOrderByOrderId/{orderId}")
-    public Order findOrderByOrderId(@PathVariable("orderId") Long orderId) {
+    public OrderUserVO findOrderByOrderId(@PathVariable("orderId") Long orderId) {
         return orderService.findOrderByOrderId(orderId);
     }
 
